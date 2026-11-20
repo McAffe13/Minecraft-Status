@@ -182,6 +182,15 @@
     }
 
     $("demo-note").hidden = !demoMode;
+
+    const source = $("data-source");
+    providerNames.forEach((n, i) => {
+      if (i > 0) source.appendChild(document.createTextNode(" & "));
+      const a = el("a", null, PROVIDERS[n].label);
+      a.href = PROVIDERS[n].home;
+      a.rel = "noopener";
+      source.appendChild(a);
+    });
   }
 
   /* ============================================================
@@ -194,39 +203,77 @@
     { online: false, players: { online: 0, max: 0, list: [] }, version: "", motd: "" }
   ];
 
+  // Zwei unabhängige Status-APIs. Manche Server (z. B. Hypixel) blockieren oder
+  // verwirren einzelne Dienste, deshalb werden standardmäßig beide gefragt.
+  function safeIcon(icon) {
+    return typeof icon === "string" && icon.startsWith("data:image/png;base64,") ? icon : null;
+  }
+
+  const PROVIDERS = {
+    mcstatus: {
+      label: "mcstatus.io",
+      home: "https://mcstatus.io",
+      url: (s) => `https://api.mcstatus.io/v2/status/${s.type === "bedrock" ? "bedrock" : "java"}/${encodeURIComponent(s.address)}`,
+      normalize: (d) => ({
+        online: d.online === true,
+        players: {
+          online: Number(d.players?.online) || 0,
+          max: Number(d.players?.max) || 0,
+          list: (d.players?.list || []).map((p) => p.name_clean || p.name_raw).filter(Boolean)
+        },
+        version: d.version?.name_clean || d.version?.name_raw || "",
+        motd: d.motd?.clean || "",
+        icon: d.icon
+      })
+    },
+    mcsrvstat: {
+      label: "mcsrvstat.us",
+      home: "https://mcsrvstat.us",
+      url: (s) => `https://api.mcsrvstat.us/${s.type === "bedrock" ? "bedrock/" : ""}3/${encodeURIComponent(s.address)}`,
+      normalize: (d) => ({
+        online: d.online === true,
+        players: {
+          online: Number(d.players?.online) || 0,
+          max: Number(d.players?.max) || 0,
+          list: (d.players?.list || []).map((p) => (typeof p === "string" ? p : p.name)).filter(Boolean)
+        },
+        version: d.version || "",
+        motd: (d.motd?.clean || []).join("\n"),
+        icon: d.icon
+      })
+    }
+  };
+
+  const providerNames = PROVIDERS[cfg.provider] ? [cfg.provider] : ["mcstatus", "mcsrvstat"];
+
+  async function queryProvider(provider, server) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 10000);
+    try {
+      const res = await fetch(provider.url(server), { signal: controller.signal });
+      if (!res.ok) return null;
+      const result = provider.normalize(await res.json());
+      result.icon = safeIcon(result.icon);
+      return result;
+    } catch (_) {
+      return null; // Netzwerkfehler oder Timeout: dieser Dienst liefert keine Aussage
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+
   async function fetchServer(server, index) {
     if (demoMode) {
       await new Promise((r) => setTimeout(r, 250 + index * 150));
       return { ...DEMO_DATA[index % DEMO_DATA.length], icon: null };
     }
 
-    const base = server.type === "bedrock"
-      ? "https://api.mcsrvstat.us/bedrock/3/"
-      : "https://api.mcsrvstat.us/3/";
-
-    const controller = new AbortController();
-    const timer = setTimeout(() => controller.abort(), 10000);
-
-    try {
-      const res = await fetch(base + encodeURIComponent(server.address), { signal: controller.signal });
-      if (!res.ok) throw new Error("HTTP " + res.status);
-      const data = await res.json();
-      return {
-        online: data.online === true,
-        players: {
-          online: Number(data.players?.online) || 0,
-          max: Number(data.players?.max) || 0,
-          list: (data.players?.list || []).map((p) => (typeof p === "string" ? p : p.name)).filter(Boolean)
-        },
-        version: data.version || "",
-        motd: (data.motd?.clean || []).join("\n"),
-        icon: typeof data.icon === "string" && data.icon.startsWith("data:image/png;base64,") ? data.icon : null
-      };
-    } catch (_) {
+    const answers = (await Promise.all(providerNames.map((n) => queryProvider(PROVIDERS[n], server)))).filter(Boolean);
+    if (!answers.length) {
       return { error: true, online: false, players: { online: 0, max: 0, list: [] }, version: "", motd: "", icon: null };
-    } finally {
-      clearTimeout(timer);
     }
+    // Meldet mindestens ein Dienst "online", gilt der Server als online.
+    return answers.find((a) => a.online) || answers[0];
   }
 
   /* ============================================================

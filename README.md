@@ -4,7 +4,7 @@ Eine Status-Page für Minecraft-Server, die du forken und mit deinen eigenen Ser
 
 ## Features
 
-- Live-Status für beliebig viele Server (Java und Bedrock) über die API von [mcsrvstat.us](https://mcsrvstat.us)
+- Live-Status für beliebig viele Server (Java und Bedrock) über die APIs von [mcstatus.io](https://mcstatus.io) und [mcsrvstat.us](https://mcsrvstat.us). Meldet einer der beiden "online", gilt der Server als online, so fallen auch Server wie Hypixel nicht fälschlich durch, die einzelne Dienste blockieren
 - Spielerzahl mit Auslastungsbalken, Version, MOTD, Server-Icon und Spielerliste
 - Zusammenfassung ("Alle Systeme laufen", "Teilweise Störung" usw.) mit Gesamtzahl der Spieler
 - **5 Designs:** Modern, Classic, Neon, Light und Nether
@@ -81,6 +81,7 @@ Pro Server lässt sich zusätzlich ein eigenes Icon setzen (`icon: "config/asset
 | ---------------- | --------- |
 | `title`, `subtitle`, `footerText` | Texte der Seite |
 | `links`          | Links im Header, z. B. Discord oder Website |
+| `provider`       | `"auto"` (beide Dienste, Standard), `"mcstatus"` oder `"mcsrvstat"` |
 | `refreshSeconds` | Aktualisierungsintervall (mindestens 30) |
 | `maxPlayerNames` | Wie viele Spielernamen pro Server angezeigt werden |
 | `playerHeads`    | Spielerköpfe anzeigen. Lädt Bilder von mc-heads.net, die Spielernamen werden dabei an diesen Dienst übertragen |
@@ -110,8 +111,9 @@ Die Stylesheets werden bei Bedarf automatisch geladen, in `index.html` musst du 
 
 ## Hinweise
 
-- Die API cached Antworten etwa eine Minute, ein kürzeres Aktualisierungsintervall als 30 Sekunden bringt nichts und wird deshalb ignoriert.
-- Server, die Anfragen blockieren oder Query/Ping abschalten, werden als offline oder unbekannt angezeigt.
+- Die APIs cachen Antworten etwa eine Minute, ein kürzeres Aktualisierungsintervall als 30 Sekunden bringt nichts und wird deshalb ignoriert.
+- Im Modus `"auto"` wird pro Server und Aktualisierung bei beiden Diensten angefragt. "Unbekannt" erscheint nur, wenn keiner der Dienste erreichbar war.
+- Server, die Anfragen von allen Diensten blockieren oder Query/Ping abschalten, werden als offline angezeigt.
 - Serverdaten wie MOTD und Spielernamen werden ausschließlich als Text gerendert, nie als HTML.
 
 ## Lizenz

@@ -67,7 +67,14 @@ window.STATUS_CONFIG = {
 
   /* ---------- Verhalten ---------- */
 
-  // Automatische Aktualisierung in Sekunden (mindestens 30, die API cached ca. 1 Minute)
+  // Welche Status-API abgefragt wird:
+  //   "auto"      = mcstatus.io und mcsrvstat.us, meldet einer "online", gilt der Server als online
+  //                 (empfohlen, manche Server wie Hypixel blockieren einzelne Dienste)
+  //   "mcstatus"  = nur mcstatus.io
+  //   "mcsrvstat" = nur mcsrvstat.us
+  provider: "auto",
+
+  // Automatische Aktualisierung in Sekunden (mindestens 30, die APIs cachen ca. 1 Minute)
   refreshSeconds: 60,
 
   // Maximale Anzahl angezeigter Spielernamen pro Server

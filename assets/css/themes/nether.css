@@ -1,0 +1,43 @@
+/* Design: Nether – Netherrack, Lava und Glut */
+:root[data-theme="nether"] {
+  --font: "Segoe UI", system-ui, sans-serif;
+  --font-heading: Georgia, "Times New Roman", serif;
+  --font-mono: ui-monospace, Menlo, Consolas, monospace;
+
+  --bg: #2a0b0b;
+  --bg-image:
+    radial-gradient(800px 500px at 50% 120%, rgba(255,106,43,.35), transparent 65%),
+    radial-gradient(500px 300px at 10% 0%, rgba(160,30,30,.35), transparent 60%);
+  --text: #ffe9dc;
+  --text-muted: #c79b86;
+
+  --surface: rgba(70,18,18,.75);
+  --surface-strong: rgba(110,30,25,.8);
+  --inset: rgba(20,4,4,.6);
+  --header-bg: rgba(35,8,8,.9);
+  --border: #7a2a1c;
+  --border-width: 2px;
+
+  --accent: #ff6a2b;
+  --accent-soft: rgba(255,106,43,.4);
+  --accent-contrast: #200600;
+
+  --ok: #8fd14f;
+  --warn: #ffb02e;
+  --bad: #ff4b3a;
+  --unknown: #86655a;
+  --pill-text: #1a0500;
+
+  --radius: 6px;
+  --radius-sm: 4px;
+  --radius-xs: 2px;
+  --shadow: 0 8px 26px rgba(0,0,0,.5), inset 0 0 40px rgba(255,80,20,.06);
+  --blur: none;
+
+  --logo: linear-gradient(135deg, #7a1f1f 0 40%, #ff6a2b 40% 70%, #ffd166 70% 100%);
+}
+
+:root[data-theme="nether"] .brand h1 { letter-spacing: .04em; text-shadow: 0 0 14px rgba(255,106,43,.6); }
+:root[data-theme="nether"] .bar-fill { background: linear-gradient(90deg, #ff4b3a, #ff6a2b, #ffd166); }
+:root[data-theme="nether"] .card { border-color: #7a2a1c; }
+:root[data-theme="nether"] .card.is-online { box-shadow: var(--shadow), 0 0 18px rgba(143,209,79,.12); }

@@ -1,0 +1,57 @@
+/* Design: Classic – Minecraft-GUI-Look mit Erde, Gras und eckigen Rahmen */
+:root[data-theme="classic"] {
+  --font: "Trebuchet MS", "Verdana", sans-serif;
+  --font-heading: "Courier New", ui-monospace, monospace;
+  --font-mono: "Courier New", ui-monospace, monospace;
+
+  --bg: #6b4423;
+  /* Erdblock-Muster, komplett per CSS erzeugt */
+  --bg-image:
+    linear-gradient(rgba(0,0,0,.18) 2px, transparent 2px),
+    linear-gradient(90deg, rgba(0,0,0,.18) 2px, transparent 2px);
+  --text: #ffffff;
+  --text-muted: #cfcfcf;
+
+  --surface: #3a3a3a;
+  --surface-strong: #4d4d4d;
+  --inset: #1f1f1f;
+  --header-bg: #55a630;
+  --border: #111111;
+  --border-width: 3px;
+
+  --accent: #55a630;
+  --accent-soft: rgba(85,166,48,.45);
+  --accent-contrast: #ffffff;
+  --accent-border: #2f6b18;
+
+  --ok: #55a630;
+  --warn: #f2c200;
+  --bad: #c0392b;
+  --unknown: #7f7f7f;
+
+  --radius: 0;
+  --radius-sm: 0;
+  --radius-xs: 0;
+  /* innere Hell/Dunkel-Kante wie bei Minecraft-Buttons */
+  --shadow: inset 3px 3px 0 rgba(255,255,255,.18), inset -3px -3px 0 rgba(0,0,0,.4);
+
+  --logo: linear-gradient(#55a630 0 35%, #8b5a2b 35% 100%);
+}
+
+:root[data-theme="classic"] body { background-size: 64px 64px, 64px 64px, auto; }
+:root[data-theme="classic"] .site-header { color: #fff; text-shadow: 2px 2px 0 rgba(0,0,0,.45); }
+:root[data-theme="classic"] .site-header .muted { color: #e6f5dc; }
+:root[data-theme="classic"] .brand h1 { letter-spacing: .03em; text-transform: uppercase; }
+:root[data-theme="classic"] .site-footer { background: #2b2b2b; }
+:root[data-theme="classic"] .pill,
+:root[data-theme="classic"] .player,
+:root[data-theme="classic"] .bar,
+:root[data-theme="classic"] .bar-fill { border-radius: 0; }
+:root[data-theme="classic"] .bar-fill {
+  background: repeating-linear-gradient(90deg, #55a630 0 8px, #6fc23f 8px 16px);
+}
+:root[data-theme="classic"] .btn,
+:root[data-theme="classic"] .theme-btn {
+  box-shadow: inset 2px 2px 0 rgba(255,255,255,.3), inset -2px -2px 0 rgba(0,0,0,.35);
+}
+:root[data-theme="classic"] .card-title { text-transform: uppercase; letter-spacing: .02em; }

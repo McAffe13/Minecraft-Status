@@ -1,0 +1,36 @@
+/* Design: Modern – dunkel, Glas-Optik, weiche Ecken */
+:root[data-theme="modern"] {
+  --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --font-heading: var(--font);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --bg: #0f1115;
+  --bg-image: radial-gradient(900px 500px at 85% -10%, rgba(91,140,255,.18), transparent 60%),
+              radial-gradient(700px 400px at 0% 0%, rgba(120,80,255,.12), transparent 60%);
+  --text: #e8ecf4;
+  --text-muted: #8f98ab;
+
+  --surface: rgba(255,255,255,.04);
+  --surface-strong: rgba(255,255,255,.08);
+  --inset: rgba(0,0,0,.28);
+  --header-bg: rgba(15,17,21,.7);
+  --border: rgba(255,255,255,.1);
+  --border-width: 1px;
+
+  --accent: #5b8cff;
+  --accent-soft: rgba(91,140,255,.3);
+  --accent-contrast: #0b1020;
+
+  --ok: #2ecc71;
+  --warn: #f5b942;
+  --bad: #ff5d6c;
+  --unknown: #6b7385;
+
+  --radius: 16px;
+  --radius-sm: 10px;
+  --radius-xs: 6px;
+  --shadow: 0 10px 30px rgba(0,0,0,.35);
+  --blur: blur(12px);
+
+  --logo: linear-gradient(135deg, #5b8cff, #9b6bff);
+}

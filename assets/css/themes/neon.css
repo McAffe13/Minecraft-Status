@@ -1,0 +1,49 @@
+/* Design: Neon – Cyberpunk mit leuchtenden Rändern */
+:root[data-theme="neon"] {
+  --font: "Segoe UI", system-ui, sans-serif;
+  --font-heading: "Trebuchet MS", system-ui, sans-serif;
+  --font-mono: ui-monospace, Menlo, Consolas, monospace;
+
+  --bg: #0a0420;
+  --bg-image:
+    radial-gradient(700px 400px at 90% 0%, rgba(255,47,209,.22), transparent 60%),
+    radial-gradient(700px 400px at 0% 100%, rgba(0,229,255,.18), transparent 60%),
+    linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
+  --text: #f4eaff;
+  --text-muted: #a99bc9;
+
+  --surface: rgba(20,8,50,.75);
+  --surface-strong: rgba(60,20,110,.6);
+  --inset: rgba(0,0,0,.45);
+  --header-bg: rgba(10,4,32,.85);
+  --border: #5b2a9e;
+  --border-width: 1px;
+
+  --accent: #ff2fd1;
+  --accent-soft: rgba(255,47,209,.4);
+  --accent-contrast: #12021f;
+
+  --ok: #00f0a8;
+  --warn: #ffe14d;
+  --bad: #ff3860;
+  --unknown: #6c5f8f;
+  --pill-text: #0a0420;
+
+  --radius: 12px;
+  --radius-sm: 8px;
+  --radius-xs: 4px;
+  --shadow: 0 0 24px rgba(255,47,209,.15);
+  --blur: blur(6px);
+
+  --logo: linear-gradient(135deg, #ff2fd1, #00e5ff);
+}
+
+:root[data-theme="neon"] body { background-size: auto, auto, 32px 32px, 32px 32px; }
+:root[data-theme="neon"] .brand h1 { text-shadow: 0 0 14px rgba(255,47,209,.8); letter-spacing: .04em; }
+:root[data-theme="neon"] .card { border-color: rgba(255,47,209,.5); }
+:root[data-theme="neon"] .card.is-online { box-shadow: 0 0 22px rgba(0,240,168,.2); border-color: rgba(0,240,168,.6); }
+:root[data-theme="neon"] .card.is-offline { box-shadow: 0 0 22px rgba(255,56,96,.2); border-color: rgba(255,56,96,.6); }
+:root[data-theme="neon"] .btn,
+:root[data-theme="neon"] .theme-btn[aria-pressed="true"] { box-shadow: 0 0 14px var(--accent-soft); }
+:root[data-theme="neon"] .bar-fill { background: linear-gradient(90deg, #ff2fd1, #00e5ff); box-shadow: 0 0 10px rgba(255,47,209,.7); }

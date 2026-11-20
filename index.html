@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="de" data-theme="modern">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Minecraft Status</title>
+  <meta name="description" content="Live-Status deiner Minecraft-Server mit umschaltbaren Designs.">
+  <meta name="theme-color" content="#0f1115">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2355a630'/%3E%3Crect y='6' width='16' height='10' fill='%238b5a2b'/%3E%3C/svg%3E">
+
+  <link rel="stylesheet" href="assets/css/base.css">
+  <link rel="stylesheet" href="assets/css/themes/classic.css">
+  <link rel="stylesheet" href="assets/css/themes/modern.css">
+  <link rel="stylesheet" href="assets/css/themes/neon.css">
+  <link rel="stylesheet" href="assets/css/themes/light.css">
+  <link rel="stylesheet" href="assets/css/themes/nether.css">
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <header class="site-header">
+    <div class="wrap header-inner">
+      <div class="brand">
+        <span class="brand-logo" aria-hidden="true"></span>
+        <div>
+          <h1 id="site-title">Minecraft Status</h1>
+          <p id="site-subtitle" class="muted"></p>
+        </div>
+      </div>
+
+      <nav class="theme-switcher" aria-label="Design wählen">
+        <span class="theme-switcher-label muted">Design</span>
+        <div id="theme-buttons" class="theme-buttons" role="group"></div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="wrap">
+    <section id="summary" class="summary" aria-live="polite">
+      <span class="summary-dot" aria-hidden="true"></span>
+      <div class="summary-text">
+        <strong id="summary-title">Lade Status …</strong>
+        <span id="summary-detail" class="muted"></span>
+      </div>
+      <button id="refresh" class="btn" type="button">Aktualisieren</button>
+    </section>
+
+    <section id="servers" class="servers" aria-label="Server"></section>
+
+    <p id="demo-note" class="demo-note" hidden>
+      Demo-Modus aktiv: Es werden Beispieldaten angezeigt, keine echten Server abgefragt.
+    </p>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <p class="muted">
+        Daten via <a href="https://mcsrvstat.us" rel="noopener">mcsrvstat.us</a> ·
+        <span id="last-updated">noch nicht aktualisiert</span> ·
+        <a href="https://github.com/McAffe13/Minecraft-Status" rel="noopener">Quellcode auf GitHub</a>
+      </p>
+    </div>
+  </footer>
+
+  <noscript>
+    <p class="wrap">Diese Seite benötigt JavaScript, um den Server-Status zu laden.</p>
+  </noscript>
+
+  <script src="assets/js/config.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>

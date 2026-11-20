@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" shape-rendering="crispEdges">
+  <!-- Einfacher Block mit Grasdecke: ersetze diese Datei durch dein eigenes Logo -->
+  <rect width="64" height="64" fill="#8b5a2b"/>
+  <rect width="64" height="22" fill="#55a630"/>
+  <rect y="22" width="64" height="6" fill="#3f7d24"/>
+  <g fill="#6fc23f"><rect x="6" y="4" width="8" height="8"/><rect x="30" y="10" width="8" height="8"/><rect x="48" y="2" width="10" height="8"/></g>
+  <g fill="#6e4521"><rect x="8" y="36" width="10" height="8"/><rect x="34" y="42" width="10" height="8"/><rect x="48" y="32" width="8" height="8"/><rect x="18" y="52" width="8" height="8"/></g>
+  <g fill="#a06c3b"><rect x="26" y="32" width="8" height="6"/><rect x="50" y="50" width="8" height="8"/><rect x="4" y="54" width="8" height="6"/></g>
+</svg>

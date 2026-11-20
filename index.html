@@ -1,46 +1,48 @@
 <!doctype html>
-<html lang="de" data-theme="modern">
+<html lang="de">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Minecraft Status</title>
-  <meta name="description" content="Live-Status deiner Minecraft-Server mit umschaltbaren Designs.">
+  <meta name="description" content="Live-Status deiner Minecraft-Server.">
   <meta name="theme-color" content="#0f1115">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Crect width='16' height='16' fill='%2355a630'/%3E%3Crect y='6' width='16' height='10' fill='%238b5a2b'/%3E%3C/svg%3E">
+  <link id="favicon" rel="icon" href="config/assets/favicon.svg" type="image/svg+xml">
 
+  <!-- Basis-Layout. Designs (config/themes/*.css) und Einstellungen (config/config.js) werden aus dem config-Ordner geladen. -->
   <link rel="stylesheet" href="assets/css/base.css">
-  <link rel="stylesheet" href="assets/css/themes/classic.css">
-  <link rel="stylesheet" href="assets/css/themes/modern.css">
-  <link rel="stylesheet" href="assets/css/themes/neon.css">
-  <link rel="stylesheet" href="assets/css/themes/light.css">
-  <link rel="stylesheet" href="assets/css/themes/nether.css">
+  <noscript><style>html:not([data-ready]) body { opacity: 1 !important; }</style></noscript>
 </head>
 <body>
+  <div id="bg-custom" class="bg-custom" aria-hidden="true"></div>
   <a class="skip-link" href="#main">Zum Inhalt springen</a>
 
   <header class="site-header">
     <div class="wrap header-inner">
       <div class="brand">
-        <span class="brand-logo" aria-hidden="true"></span>
-        <div>
+        <span id="brand-logo" class="brand-logo" aria-hidden="true"></span>
+        <div class="brand-text">
           <h1 id="site-title">Minecraft Status</h1>
           <p id="site-subtitle" class="muted"></p>
         </div>
       </div>
 
-      <nav class="theme-switcher" aria-label="Design wählen">
-        <span class="theme-switcher-label muted">Design</span>
-        <div id="theme-buttons" class="theme-buttons" role="group"></div>
-      </nav>
+      <div class="header-actions">
+        <nav id="header-links" class="header-links" aria-label="Links" hidden></nav>
+
+        <div id="theme-switcher" class="theme-switcher" role="group" aria-label="Design wählen" hidden>
+          <span class="theme-switcher-label muted">Design</span>
+          <div id="theme-buttons" class="theme-buttons"></div>
+        </div>
+      </div>
     </div>
   </header>
 
   <main id="main" class="wrap">
-    <section id="summary" class="summary" aria-live="polite">
+    <section id="summary" class="summary" data-state="loading" aria-live="polite">
       <span class="summary-dot" aria-hidden="true"></span>
       <div class="summary-text">
-        <strong id="summary-title">Lade Status …</strong>
-        <span id="summary-detail" class="muted"></span>
+        <strong id="summary-title" class="summary-title">Lade Status …</strong>
+        <span id="summary-detail" class="summary-detail muted"></span>
       </div>
       <button id="refresh" class="btn" type="button">Aktualisieren</button>
     </section>
@@ -53,7 +55,8 @@
   </main>
 
   <footer class="site-footer">
-    <div class="wrap">
+    <div class="wrap footer-inner">
+      <p id="footer-text" class="muted" hidden></p>
       <p class="muted">
         Daten via <a href="https://mcsrvstat.us" rel="noopener">mcsrvstat.us</a> ·
         <span id="last-updated">noch nicht aktualisiert</span> ·
@@ -66,7 +69,7 @@
     <p class="wrap">Diese Seite benötigt JavaScript, um den Server-Status zu laden.</p>
   </noscript>
 
-  <script src="assets/js/config.js"></script>
+  <script src="config/config.js"></script>
   <script src="assets/js/app.js"></script>
 </body>
 </html>

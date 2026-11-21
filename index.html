@@ -1,20 +1,25 @@
 <!doctype html>
-<html lang="de">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Minecraft Status</title>
-  <meta name="description" content="Live-Status deiner Minecraft-Server.">
+  <meta name="description" content="Live status of our Minecraft servers.">
   <meta name="theme-color" content="#0f1115">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Minecraft Status">
+  <meta property="og:description" content="Live status of our Minecraft servers.">
   <link id="favicon" rel="icon" href="config/assets/favicon.svg" type="image/svg+xml">
 
-  <!-- Basis-Layout. Designs (config/themes/*.css) und Einstellungen (config/config.js) werden aus dem config-Ordner geladen. -->
+  <!--
+    Base layout only. Themes (config/themes/*.css), languages (config/languages/*.js)
+    and all settings (config/config.js) are loaded from the config folder.
+  -->
   <link rel="stylesheet" href="assets/css/base.css">
-  <noscript><style>html:not([data-ready]) body { opacity: 1 !important; }</style></noscript>
 </head>
 <body>
   <div id="bg-custom" class="bg-custom" aria-hidden="true"></div>
-  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+  <a class="skip-link" href="#main" data-i18n="a11y.skip">Skip to content</a>
 
   <header class="site-header">
     <div class="wrap header-inner">
@@ -22,15 +27,22 @@
         <span id="brand-logo" class="brand-logo" aria-hidden="true"></span>
         <div class="brand-text">
           <h1 id="site-title">Minecraft Status</h1>
-          <p id="site-subtitle" class="muted"></p>
+          <p id="site-subtitle" class="muted">Live server status</p>
         </div>
       </div>
 
       <div class="header-actions">
-        <nav id="header-links" class="header-links" aria-label="Links" hidden></nav>
+        <nav id="header-links" class="header-links" data-i18n-aria="header.links" aria-label="Links" hidden></nav>
 
-        <div id="theme-switcher" class="theme-switcher" role="group" aria-label="Design wählen" hidden>
-          <span class="theme-switcher-label muted">Design</span>
+        <label id="language-switcher" class="select-wrap" hidden>
+          <span class="select-icon" data-icon="globe"></span>
+          <span class="sr-only" data-i18n="header.language">Language</span>
+          <select id="language-select"></select>
+          <span class="select-chevron" data-icon="chevron"></span>
+        </label>
+
+        <div id="theme-switcher" class="theme-switcher" role="group" aria-labelledby="theme-label" hidden>
+          <span id="theme-label" class="theme-switcher-label muted" data-i18n="header.theme">Theme</span>
           <div id="theme-buttons" class="theme-buttons"></div>
         </div>
       </div>
@@ -38,35 +50,58 @@
   </header>
 
   <main id="main" class="wrap">
-    <section id="summary" class="summary" data-state="loading" aria-live="polite">
-      <span class="summary-dot" aria-hidden="true"></span>
-      <div class="summary-text">
-        <strong id="summary-title" class="summary-title">Lade Status …</strong>
-        <span id="summary-detail" class="summary-detail muted"></span>
+    <section id="summary" class="summary" data-state="loading">
+      <div class="summary-main">
+        <span id="summary-icon" class="summary-icon"></span>
+        <h2 id="summary-title" class="summary-title" role="status" aria-live="polite">Checking server status…</h2>
       </div>
-      <button id="refresh" class="btn" type="button">Aktualisieren</button>
+
+      <dl class="summary-stats">
+        <div class="stat-chip">
+          <dt data-i18n="stat.servers">Servers online</dt>
+          <dd id="stat-servers">–</dd>
+        </div>
+        <div class="stat-chip">
+          <dt data-i18n="stat.players">Players online</dt>
+          <dd id="stat-players">–</dd>
+        </div>
+        <div class="stat-chip">
+          <dt data-i18n="stat.updated">Last updated</dt>
+          <dd><time id="stat-updated">–</time></dd>
+        </div>
+      </dl>
+
+      <button id="refresh" class="btn" type="button">
+        <span class="btn-icon" data-icon="refresh"></span>
+        <span id="refresh-label">Refresh</span>
+      </button>
+
+      <div class="summary-progress" aria-hidden="true"><span id="progress-bar"></span></div>
     </section>
 
-    <section id="servers" class="servers" aria-label="Server"></section>
+    <section id="servers" class="servers" data-i18n-aria="section.servers" aria-label="Servers"></section>
 
-    <p id="demo-note" class="demo-note" hidden>
-      Demo-Modus aktiv: Es werden Beispieldaten angezeigt, keine echten Server abgefragt.
+    <p id="demo-note" class="demo-note" data-i18n="demo.note" hidden>
+      Demo mode: sample data is shown, no real servers are queried.
     </p>
   </main>
 
   <footer class="site-footer">
     <div class="wrap footer-inner">
       <p id="footer-text" class="muted" hidden></p>
-      <p class="muted">
-        Daten via <span id="data-source"></span> ·
-        <span id="last-updated">noch nicht aktualisiert</span> ·
-        <a href="https://github.com/McAffe13/Minecraft-Status" rel="noopener">Quellcode auf GitHub</a>
+      <p class="muted footer-credits">
+        <span data-i18n="footer.dataFrom">Data from</span>
+        <span id="data-source"></span>
+        <span aria-hidden="true">·</span>
+        <a href="https://github.com/McAffe13/Minecraft-Status" rel="noopener" data-i18n="footer.source">Source code on GitHub</a>
       </p>
     </div>
   </footer>
 
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
   <noscript>
-    <p class="wrap">Diese Seite benötigt JavaScript, um den Server-Status zu laden.</p>
+    <p class="wrap">This page needs JavaScript to load the server status.</p>
   </noscript>
 
   <script src="config/config.js"></script>

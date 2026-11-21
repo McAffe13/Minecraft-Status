@@ -1,49 +1,81 @@
 /*
  * ============================================================
- *  Konfiguration der Status-Page
+ *  Status page configuration
  * ============================================================
- *  Alles, was du anpassen kannst, liegt im Ordner config/:
+ *  Everything you can customize lives in the config/ folder:
  *
- *    config/config.js    diese Datei (Texte, Server, Design-Einstellungen)
- *    config/themes/      ein Stylesheet pro Design (eigene Designs einfach dazulegen)
- *    config/assets/      Logo, Favicon, Hintergrundbild und eigene Server-Icons
+ *    config/config.js      this file (texts, servers, theme and language settings)
+ *    config/themes/        one stylesheet per theme (drop in your own)
+ *    config/languages/     one file per language (drop in your own)
+ *    config/assets/        logo, favicon, background image and custom server icons
  *
- *  Nach einem Fork musst du außerhalb von config/ nichts ändern.
- *  Alle Pfade sind relativ zur index.html.
+ *  After forking you do not need to change anything outside config/.
+ *  All paths are relative to index.html.
  */
 window.STATUS_CONFIG = {
 
-  /* ---------- Texte ---------- */
+  /* ---------- Texts ---------- */
 
+  // Texts can be a plain string, or an object with one string per language code:
+  //   title: { en: "Our servers", de: "Unsere Server" }
   title: "Minecraft Status",
-  subtitle: "Live-Status unserer Server",
-  footerText: "",            // optionaler Zusatztext im Footer
+  subtitle: null,            // null = use the translated default ("Live server status")
+  footerText: "",            // optional extra line in the footer
 
-  // Links oben im Header (z. B. Discord, Website). Leer lassen für keine Links.
+  // Links in the header (for example Discord or your website). Leave empty for none.
   links: [
-    // { label: "Discord", url: "https://discord.gg/dein-invite" },
-    // { label: "Website", url: "https://example.net" }
+    // { label: "Discord", url: "https://discord.gg/your-invite" },
+    // { label: { en: "Website", de: "Webseite" }, url: "https://example.net" }
   ],
 
-  /* ---------- Bilder (liegen in config/assets/) ---------- */
+  /* ---------- Images (stored in config/assets/) ---------- */
 
-  logo: "config/assets/logo.svg",         // null = farbiges Quadrat aus dem Design
-  favicon: "config/assets/favicon.svg",   // null = Standard-Icon
-  background: null,                       // z. B. "config/assets/background.jpg"
+  logo: "config/assets/logo.svg",         // null = coloured square from the theme
+  favicon: "config/assets/favicon.svg",   // null = browser default icon
+  background: null,                       // for example "config/assets/background.jpg"
+
+  /* ---------- Language ---------- */
+
+  // Default language (a code from the list below).
+  language: "en",
+
+  // true  = on the first visit, use the visitor's browser language if it is in the list
+  // false = always start with "language" (visitors can still switch if allowed below)
+  autoDetectLanguage: false,
+
+  // true  = visitors get a language menu; their choice is remembered in the browser
+  //         and can be shared as a link, for example ?lang=de
+  // false = no menu, the page is always shown in "language"
+  allowLanguageSwitch: true,
+
+  // Languages offered in the menu. "code" matches config/languages/<code>.js.
+  // Remove the ones you do not want to offer.
+  languages: [
+    { code: "en", label: "English" },
+    { code: "de", label: "Deutsch" },
+    { code: "es", label: "Español" },
+    { code: "fr", label: "Français" },
+    { code: "it", label: "Italiano" },
+    { code: "pt", label: "Português" },
+    { code: "nl", label: "Nederlands" },
+    { code: "pl", label: "Polski" },
+    { code: "tr", label: "Türkçe" },
+    { code: "ru", label: "Русский" }
+  ],
 
   /* ---------- Design ---------- */
 
-  // Aktives Design. Bei allowThemeSwitch: false ist das für ALLE Besucher fest.
-  // Bei allowThemeSwitch: true ist es das Design für den ersten Besuch.
+  // Active theme. With allowThemeSwitch: false this is fixed for ALL visitors.
+  // With allowThemeSwitch: true it is the theme shown on the first visit.
   theme: "modern",
 
-  // true  = Besucher sehen einen Umschalter und dürfen ein Design wählen
-  //         (ihre Wahl wird im Browser gespeichert, auch per ?theme=neon teilbar)
-  // false = Kein Umschalter, es wird immer nur das Design aus "theme" angezeigt
+  // true  = visitors get a theme switcher; their choice is remembered in the browser
+  //         and can be shared as a link, for example ?theme=neon
+  // false = no switcher, the theme from "theme" is always used
   allowThemeSwitch: true,
 
-  // Designs, die zur Auswahl stehen. "id" entspricht config/themes/<id>.css
-  // Wenn du nur einige zeigen willst, lösche die anderen Einträge hier.
+  // Themes offered to visitors. "id" matches config/themes/<id>.css.
+  // Remove the ones you do not want to offer.
   themes: [
     { id: "modern",  label: "Modern",  swatch: ["#0f1115", "#5b8cff"] },
     { id: "classic", label: "Classic", swatch: ["#8b5a2b", "#55a630"] },
@@ -52,39 +84,40 @@ window.STATUS_CONFIG = {
     { id: "nether",  label: "Nether",  swatch: ["#2a0b0b", "#ff6a2b"] }
   ],
 
-  /* ---------- Server ---------- */
+  /* ---------- Servers ---------- */
 
-  //   name:    Anzeigename
-  //   address: Adresse, optional mit Port (z. B. "play.example.net:25566")
-  //   type:    "java" (Standard) oder "bedrock"
-  //   icon:    optional, eigenes Icon, z. B. "config/assets/survival.png"
-  //            (sonst wird das Server-Icon verwendet, falls vorhanden)
+  //   name:        display name
+  //   address:     address, optionally with a port (for example "play.example.net:25566")
+  //   type:        "java" (default) or "bedrock"
+  //   description: optional short text below the name (string or per-language object)
+  //   icon:        optional custom icon, for example "config/assets/survival.png"
+  //                (otherwise the server's own icon is used, if it has one)
   servers: [
     { name: "Hypixel", address: "mc.hypixel.net", type: "java" },
     { name: "Mineplex", address: "us.mineplex.com", type: "java" },
     { name: "The Hive (Bedrock)", address: "geo.hivebedrock.network", type: "bedrock" }
   ],
 
-  /* ---------- Verhalten ---------- */
+  /* ---------- Behaviour ---------- */
 
-  // Welche Status-API abgefragt wird:
-  //   "auto"      = mcstatus.io und mcsrvstat.us, meldet einer "online", gilt der Server als online
-  //                 (empfohlen, manche Server wie Hypixel blockieren einzelne Dienste)
-  //   "mcstatus"  = nur mcstatus.io
-  //   "mcsrvstat" = nur mcsrvstat.us
+  // Which status API is queried:
+  //   "auto"      = mcstatus.io and mcsrvstat.us; if either reports "online", the server
+  //                 counts as online (recommended, some servers block individual services)
+  //   "mcstatus"  = mcstatus.io only
+  //   "mcsrvstat" = mcsrvstat.us only
   provider: "auto",
 
-  // Automatische Aktualisierung in Sekunden (mindestens 30, die APIs cachen ca. 1 Minute)
+  // Automatic refresh interval in seconds (minimum 30, the APIs cache for about a minute)
   refreshSeconds: 60,
 
-  // Maximale Anzahl angezeigter Spielernamen pro Server
+  // Maximum number of player names shown per server
   maxPlayerNames: 12,
 
-  // Spielerköpfe vor den Namen anzeigen. Lädt Bilder von mc-heads.net,
-  // dabei werden die Spielernamen an diesen Dienst übertragen.
+  // Show player heads next to the names. Loads images from mc-heads.net,
+  // which means player names are sent to that service.
   playerHeads: false,
 
-  // true = Beispieldaten statt echter Abfragen (zum Ausprobieren der Designs).
-  // Zusätzlich lässt sich der Demo-Modus mit ?demo=1 in der URL aktivieren.
+  // true = show sample data instead of querying real servers (handy for trying out themes).
+  // The demo mode can also be switched on with ?demo=1 in the URL.
   demo: false
 };

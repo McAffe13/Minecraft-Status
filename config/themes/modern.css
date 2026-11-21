@@ -1,4 +1,4 @@
-/* Design: Modern – dunkel, Glas-Optik, weiche Ecken */
+/* Theme: Modern – dark, glass effect, soft corners */
 :root[data-theme="modern"] {
   --font: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-heading: var(--font);

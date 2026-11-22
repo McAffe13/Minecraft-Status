@@ -95,7 +95,8 @@ window.STATUS_CONFIG = {
   servers: [
     { name: "Hypixel", address: "mc.hypixel.net", type: "java" },
     { name: "Mineplex", address: "us.mineplex.com", type: "java" },
-    { name: "The Hive (Bedrock)", address: "geo.hivebedrock.network", type: "bedrock" }
+    { name: "The Hive (Bedrock)", address: "geo.hivebedrock.network", type: "bedrock" },
+    { name: "McAffen", address: "play.mcaffen.de", type: "java" }
   ],
 
   /* ---------- Behaviour ---------- */

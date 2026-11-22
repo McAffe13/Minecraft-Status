@@ -94,7 +94,6 @@ window.STATUS_CONFIG = {
   //                (otherwise the server's own icon is used, if it has one)
   servers: [
     { name: "Hypixel", address: "mc.hypixel.net", type: "java" },
-    { name: "Mineplex", address: "us.mineplex.com", type: "java" },
     { name: "The Hive (Bedrock)", address: "geo.hivebedrock.network", type: "bedrock" },
     { name: "McAffen", address: "play.mcaffen.de", type: "java" }
   ],
